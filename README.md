@@ -15,3 +15,10 @@ docker build -t golang-http-server .
 ```
 docker run -p 8080 -d golang-http-server
 ```
+
+Use the MESSAGE environment variable to add a customizable string to each response, useful when you deploy multiple instances and want to be able to differentiate them:
+
+```
+docker run -p 8080:8080 -d -e MESSAGE="service 1" golang-http-server 
+docker run -p 8081:8080 -d -e MESSAGE="service 2" golang-http-server
+```

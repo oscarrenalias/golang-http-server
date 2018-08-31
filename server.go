@@ -10,7 +10,15 @@ import (
 func writeResponse(w http.ResponseWriter, req *http.Request) {
 	fmt.Println("Handling request!")
 
-	name, err := os.Hostname()
+	// is there a custom message?
+	message := os.Getenv("MESSAGE")
+	if message != "" {
+		fmt.Println("Using custom message")
+	} else {
+		message = ""
+	}
+
+	hostName, err := os.Hostname()
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -20,8 +28,7 @@ func writeResponse(w http.ResponseWriter, req *http.Request) {
 		fmt.Println(err)
 	}
 
-	message := name
-	message = message + "\n" + string(requestDump)
+	message = hostName + "\n" + message + "\n" + string(requestDump)
 
 	w.Write([]byte(message))
 }
