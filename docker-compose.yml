@@ -1,0 +1,9 @@
+version: "3.7"
+
+services:
+  demo:
+    image: oscarrrenalias/golang-http-server
+    environment: 
+      - MESSAGE="Hello, world!"    
+    deploy:
+      replicas: 1
